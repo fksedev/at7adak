@@ -1,2 +1,6 @@
+export * from './content'
 export { default as Download } from './Download.svelte'
 export { default as Socials } from './Socials.svelte'
+export { default as Logo } from './Logo.svelte'
+export { default as SeoSite } from './SeoSite.svelte'
+export { default as BtnSkew } from './BtnSkew.svelte'

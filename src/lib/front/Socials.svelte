@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Icon } from "$lib/app"
+    import { Icon, useMobile } from "$lib/app"
+    const isMobile = useMobile()
 
     const items = [
         {
@@ -28,7 +29,7 @@
 <div class="flex-center gap-2">
     {#each items as item}
         <a href={item.url} target="_blank" class="trans opacity-60 hover:opacity-100">
-            <Icon name={item.icon} size={36} />
+            <Icon name={item.icon} size={$isMobile ? 24 : 36} />
         </a>
     {/each}
 </div>

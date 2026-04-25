@@ -1,14 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&family=Fira+Code&display=swap');
+
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+    --font-sans: "Montserrat", sans-serif;
+    --font-mono: "Fira Code", sans-serif;
+    --font-display: "Bebas Neue", serif;
+    --font-hero: "Bebas Neue", serif;
+
     --color-background: #000;
     --color-foreground: #fff;
     --color-border: #262933;
     --color-input: #262626;
     --color-ring: #525252;
     --color-accent: #3cf2e6;
+    --color-green: #c6df28;
+    --color-red: #cf1604;
+    /* --color-green: #39FF14; */
+    /* --color-red: #FF3B00; */
 
     --color-light: #9caeb1;
     --color-dark: #0c151e;
@@ -18,10 +29,8 @@
     --color-blue: #3cf2e6;
     --color-blue-dark: #127782;
     --color-blue-light: #b0fffa;
-    --color-green: #14f195;
     --color-green-highlight: #28d872;
     --color-green-pale: #3de3ab;
-    --color-red: #ff4655;
     --color-red-pale: #f23674;
 }
 
