@@ -177,7 +177,7 @@
                         THE COMPETITION STARTS <span class="text-green">SOON</span>
                     </div>
                     <div class="leading-none">
-                        Be ready. The best players win.
+                        Win real money playing your favorite games
                     </div>
                 </div>
 
