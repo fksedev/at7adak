@@ -1,6 +1,50 @@
 <script lang="ts">
-    import { Icon } from "$lib/app"
-    import { Download, Socials, Logo, SeoSite, BtnSkew, content } from "$lib/front";
+    import { fetcher, Icon, toast, validEmail } from "$lib/app"
+    import { Download, Socials, Logo, SeoSite, BtnSkew, content, Modal, Input } from "$lib/front";
+
+    let modalOpen = $state(false)
+    let name = $state('')
+    let email = $state('')
+    let loading = $state(false)
+    const baseErrors = { name: '', email: ''}
+    let errors = $state(baseErrors)
+
+    const notify = async () => {
+        errors = baseErrors
+        if(name.length < 3) {
+            errors.name = 'Invalid name'
+            return
+        }
+        if(!validEmail(email)) {
+            errors.email = 'Invalid Email'
+            return
+        }
+
+        loading = true
+
+        const res = await fetcher.post('/api/newsletter', {
+            name,
+            email
+        })
+
+        if (res.data.ok) {
+            toast.success(`Welcome ${name} to At7adak, we'll notify you once the app is ready`)
+        } else {
+            toast.error(res.data?.error || 'Error Occured')
+        }
+
+        loading = false 
+        modalOpen = false
+
+    }
+
+    const showModal = () => {
+        name = ''
+        email = ''
+        errors = baseErrors
+        loading = false
+        modalOpen = true
+    }
 </script>
 <SeoSite />
 
@@ -35,7 +79,7 @@
                             NO LUCK. <span class="text-green">ONLY SKILL.</span>
                         </div>
         
-                        <BtnSkew icon="bi:bell-fill">
+                        <BtnSkew icon="bi:bell-fill" onclick={showModal}>
                             Notify Me
                         </BtnSkew>
 
@@ -137,7 +181,7 @@
                     </div>
                 </div>
 
-                <BtnSkew icon="bi:bell-fill">
+                <BtnSkew icon="bi:bell-fill" onclick={showModal}>
                     Notify Me
                 </BtnSkew>
             </div>
@@ -167,3 +211,35 @@
         </div>
     </div>
 </div>
+
+
+<Modal bind:open={modalOpen}>
+    <div class="space-y-4 md:min-w-xl">
+        <div class="font-hero font-bold italic text-3xl text-green">
+            Notify Me
+        </div>
+
+        <Input 
+            placeholder="Your Name"
+            label="Name"
+            bind:value={name}
+            error={errors.name}
+        />
+
+        <Input 
+            placeholder="Your Email"
+            label="Email"
+            bind:value={email}
+            error={errors.email}
+        />
+
+        <button 
+            class="font-hero font-bold italic text-3xl bg-green py-2 rounded-lg text-black w-full flex-center"
+            disabled={loading}
+            class:loading
+            onclick={notify}
+        >
+            Notify Me
+        </button>
+    </div>
+</Modal>

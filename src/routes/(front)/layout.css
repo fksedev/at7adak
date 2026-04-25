@@ -15,9 +15,10 @@
     --color-border: #262933;
     --color-input: #262626;
     --color-ring: #525252;
-    --color-accent: #3cf2e6;
+    --color-accent: #c6df28;
     --color-green: #c6df28;
     --color-red: #cf1604;
+    /* --color-accent: #3cf2e6; */
     /* --color-green: #39FF14; */
     /* --color-red: #FF3B00; */
 
@@ -140,7 +141,7 @@
 }
 
 @utility input {
-    @apply w-full border border-light/50 focus:border-accent focus:shadow-2xl focus:shadow-accent/30 rounded-lg p-2 placeholder-white/65 text-white;
+    @apply w-full outline outline-border focus:outline-green focus:shadow-2xl focus:shadow-green/40 rounded-lg p-2 placeholder-white/65 text-white;
 }
 
 @utility container-sm {

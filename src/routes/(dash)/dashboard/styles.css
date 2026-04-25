@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap');
+@import 'tailwindcss';
+@source not "../../../locales/";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --default-font-family: "Geist", sans-serif;
+    --default-mono-font-family: "Geist Mono", monospace;
+
+    --color-dark: #0a0a0a;
+    --color-light: #f2f2f2;
+
+    --color-gray-0: #ffffff;
+    --color-gray-50: #f9f9f9;
+    --color-gray-100: #f2f2f2;
+    --color-gray-200: #d9d9d9;
+    --color-gray-300: #bfbfbf;
+    --color-gray-400: #a6a6a6;
+    --color-gray-500: #8c8c8c;
+    --color-gray-600: #737373;
+    --color-gray-700: #595959;
+    --color-gray-800: #404040;
+    --color-gray-900: #262626;
+    --color-gray-925: #1d1d1d;
+    --color-gray-950: #141414;
+    --color-gray-990: #0a0a0a;
+    --color-gray-999: #000000;
+}
+
+:root, body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    font-variant-numeric: proportional-nums;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+
+@layer base {
+    * {
+        @apply border-gray-900 outline-none;
+    }
+    body {
+        @apply min-h-svh bg-gray-990 text-light;
+    }
+    .container {
+        @apply mx-auto px-8;
+    }
+    
+    @media (min-width: 320px) and (max-width: 1024px) {
+        .container {
+            @apply px-4;
+        }
+    }
+
+    .separate > :not([hidden]) ~ :not([hidden])::before {
+        /* content: '⁃'; */
+        content: '•';
+        padding: 0 6px;
+    }
+
+    .fieldset {
+        @apply border rounded-lg bg-gray-990 border-gray-900;
+    }
+    .fieldset main {
+        @apply px-4 py-3 flex flex-col gap-3;
+    }
+    .fieldset footer {
+        @apply px-4 py-3 border-t border-inherit bg-transparent flex justify-end;
+    }
+}
+
+@utility scrollbar-hide {
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@utility animaiton-paused {
+    animation-play-state: paused !important;
+}
+
+@utility rtl { direction: rtl; }
+@utility ltr { direction: ltr; }
+
+@utility loading {
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    &::before {
+        content: '';
+        display: inline-block;
+        margin-right: 6px;
+        width: 16px;
+        height: 16px;
+        border: 2px solid currentColor;
+        border-top-color: transparent;
+        border-radius: 999999px;
+        animation: spin 2s infinite linear;
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg)}
+    to { transform: rotate(360deg)}
+}
+
+@utility flip-x {
+    transform: scale(-1, 1);
+}
+
+@utility flip-y {
+    transform: scale(1, -1);
+}
+
+@utility size-screen {
+    @apply w-screen h-screen;
+}
+
+@utility flex-center {
+    @apply flex items-center justify-center;
+}
+
+@utility flex-between {
+    @apply flex items-center justify-between;
+}
+
+@utility input {
+    @apply w-full border focus:border-blue-600 focus:shadow-2xl focus:shadow-blue-600/30 rounded-lg px-3 py-2 placeholder-white/65 text-white;
+}
+
+@utility card {
+    @apply bg-black border rounded-lg p-4 ring-gray-900 border-gray-900 text-white hover:ring-2;
+}
+
+@utility hero {
+    @apply flex flex-col place-items-center justify-center w-full h-screen bg-gray-999;
+}
+
+@utility btn {
+    @apply w-full transition-all duration-300 rounded-lg flex place-items-center text-nowrap whitespace-nowrap relative bg-blue-600 hover:opacity-80 text-gray-0 px-4 py-2 text-base min-h-9 justify-center;
+}
+
+@utility link {
+    @apply min-h-9 w-full flex items-center rounded-lg hover:bg-gray-900 transition duration-300 px-3;
+}
