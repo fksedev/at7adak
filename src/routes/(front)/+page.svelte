@@ -72,7 +72,7 @@
                         </div>
         
                         <div class="leading-[1.2]">
-                            Atadak is the ultimate competitive gaming app. Challenge real players, compete in matches, and win real money.
+                            At7adak is the ultimate competitive gaming app. Challenge real players, compete in matches, and win real money.
                         </div>
 
                         <div class="font-hero font-bold text-3xl italic">
@@ -194,7 +194,7 @@
             <div class="flex-center gap-3">
                 <Logo className="h-15" />
                 <div>
-                    {`Atladak is the ultimate\ncompetitive gaming app.`}
+                    {`At7adak is the ultimate\ncompetitive gaming app.`}
                 </div>
             </div>
 
