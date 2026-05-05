@@ -176,8 +176,8 @@
                     <div class="font-hero font-bold italic text-4xl leading-none">
                         THE COMPETITION STARTS <span class="text-green">SOON</span>
                     </div>
-                    <div class="leading-none">
-                        Win real money playing your favorite games
+                    <div class="leading-none lg:tracking-[0.18em]">
+                        PLAY. COMPETE. WIN REWARDS.
                     </div>
                 </div>
 
@@ -208,6 +208,10 @@
                     PLAY. <span class="text-green">COMPETE</span>. <span class="text-red">WIN.</span>
                 </div>
             </div>
+        </div>
+
+        <div class="text-center text-white/40 text-xs mt-10 lg:px-[15vw]">
+            {content.disclaimer}
         </div>
     </div>
 </div>

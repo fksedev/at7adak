@@ -9,8 +9,8 @@ export const content = {
             },
             {
                 icon: `streamline:bag-dollar`,
-                title: `REAL MONEY`,
-                desc: `Win real money for real skill.`
+                title: `REAL REWARDS`,
+                desc: `Earn real rewards for your skill.`
             },
             {
                 icon: `solar:cup-star-outline`,
@@ -50,7 +50,7 @@ export const content = {
             {
                 icon: `solar:wallet-outline`,
                 title: `SECURE PAYOUTS`,
-                desc: `Safe & fast wallet and withdrawals.`
+                desc: `Fast & secure payout system`
             },
             {
                 icon: `lucide:zap`,
@@ -63,4 +63,15 @@ export const content = {
                 desc: `No luck, only your skill matters.`
             },
     ],
+    disclaimer: `
+        AT7ADAK is a skill-based competitive gaming platform where players compete against each other in video games. All matches are based on player skill and not chance.
+        \n
+        AT7ADAK does not provide or host the games themselves and is not affiliated with any game publishers.
+        \n
+        Participation is voluntary. Entry fees may apply to certain matches or tournaments. Prizes are awarded to winners based on match results.
+        \n
+        AT7ADAK does not guarantee winnings. Outcomes depend solely on player performance.
+        \n
+        By using the platform, users agree to the Terms & Conditions and Fair Play policies.
+    `
 }
