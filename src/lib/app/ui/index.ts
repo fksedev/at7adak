@@ -1,6 +1,7 @@
 // export * from './animation'
 
 export * from './confetti'
+export * from './phone'
 
 export {default as Accordion} from './Accordion.svelte'
 export { default as Avatar } from './Avatar.svelte'

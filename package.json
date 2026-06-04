@@ -36,6 +36,7 @@
 		"@iconify/svelte": "^5.2.1",
 		"arctic": "^3.7.0",
 		"html5-qrcode": "^2.3.8",
+		"libphonenumber-js": "^1.13.5",
 		"luxon": "^3.7.2",
 		"nodemailer": "^8.0.5"
 	}
