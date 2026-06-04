@@ -22,7 +22,7 @@ export const POST: RequestHandler = async ({ request }) => {
         const res = await fetcher.withHeaders({
             Username,
             Password,
-        }).post(url, payload)
+        }).withLog().post(url, payload)
     
         return jsonSuccess({ 
             data: res.data,
