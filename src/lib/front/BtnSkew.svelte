@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, cn } from "$lib/app"
+    import { Icon, cn } from "$lib/front"
     import type { Snippet } from "svelte"
 
     let {

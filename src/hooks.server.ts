@@ -1,6 +1,6 @@
 import { redirect, type Handle } from "@sveltejs/kit";
 import { db, dbf, adminsTable, usersTable } from "$lib/server/db";
-import { getVercelHeaders } from '$lib/app'
+import { getVercelHeaders } from '$lib/front'
 import { deleteCookie } from "$lib/server/auth";
 
 const fallbackCountry = 'LB'

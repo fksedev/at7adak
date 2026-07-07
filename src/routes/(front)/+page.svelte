@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { fetcher, Icon, toast, validEmail } from "$lib/app"
+    import { fetcher, Icon, validEmail } from "$lib/front"
     import { Download, Socials, Logo, SeoSite, BtnSkew, content, Modal, Input } from "$lib/front";
 
     let modalOpen = $state(false)
@@ -28,9 +28,9 @@
         })
 
         if (res.data.ok) {
-            toast.success(`Welcome ${name} to At7adak, we'll notify you once the app is ready`)
+            alert(`Welcome ${name} to At7adak, we'll notify you once the app is ready`)
         } else {
-            toast.error(res.data?.error || 'Error Occured')
+            alert(res.data?.error || 'Error Occured')
         }
 
         loading = false 

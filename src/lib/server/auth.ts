@@ -1,4 +1,4 @@
-import { checkPWD, generateRandomString, hashPWD, isWithinExpiration, nanoid, referralCodes, validEmail } from "$lib/app"
+import { checkPWD, generateRandomString, hashPWD, isWithinExpiration, nanoid, validEmail } from "$lib/front"
 import {db, dbf, passwordResetTable, usersTable } from "$lib/server/db"
 import { type Cookies } from "@sveltejs/kit"
 
@@ -56,14 +56,14 @@ export const deleteCookie = (
 
 export const createToken = () => crypto.randomUUID()
 
-const generateReferralCode = async () => {
-    const code = referralCodes.make()
-    const check = await db.query.usersTable.findFirst({
-        // where: dbf.eq(usersTable.referralCode, code)
-    })
-    if (check) return await generateReferralCode()
-    return code
-}
+// const generateReferralCode = async () => {
+//     const code = referralCodes.make()
+//     const check = await db.query.usersTable.findFirst({
+//         // where: dbf.eq(usersTable.referralCode, code)
+//     })
+//     if (check) return await generateReferralCode()
+//     return code
+// }
 
 export const authUserById = async (id) => {
     return await db.query.usersTable.findFirst({
@@ -175,7 +175,7 @@ export const authGoogle = async ({
             country: locals.country,
         }).where(dbf.eq(usersTable.id, check.id))
     } else {
-        const referralCode = await generateReferralCode()
+        // const referralCode = await generateReferralCode()
         const email = data.email.trim().toLowerCase()
 
         const [{ insertId }] = await db.insert(usersTable).values({

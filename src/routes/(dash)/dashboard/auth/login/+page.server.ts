@@ -4,24 +4,6 @@ import { fail, redirect } from '@sveltejs/kit';
 import { db, dbf, adminsTable } from "$lib/server/db"
 
 export const load = (async () => {
-    try {
-        const check = await db.query.adminsTable.findFirst({
-            where: dbf.eq(adminsTable.isDev, 1)
-        })
-        if(!check) {
-            const [{insertId}] = await db.insert(adminsTable).values({
-                name: 'Fadi Badawi',
-                email: 'ifadbad@gmail.com',
-                password: hashPWD('password'),
-                role: 'super-admin',
-                isDev: 1,
-                secret: authenticator.generateSecret(),
-                token: crypto.randomUUID(),
-            })
-        }
-    } catch (error) {
-        
-    }
     return {};
 }) satisfies PageServerLoad;
 

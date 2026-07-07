@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Seo } from "$lib/app";
+    import { Seo } from "$lib/front";
     let {
         title = "At7adak – Compete, Play & Win Real Money in Gaming Tournaments",
         description = "Join At7adak, the ultimate competitive gaming platform where you can challenge players, compete in tournaments, and win real money. No luck - only skill. Play EAFC, CS2, Dota and more."

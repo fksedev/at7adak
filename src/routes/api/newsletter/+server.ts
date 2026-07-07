@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { csrfVerify, jsonError, jsonSuccess, validEmail } from '$lib/app';
+import { csrfVerify, jsonError, jsonSuccess, validEmail } from '$lib/front';
 import {db, dbf, newsletterTable } from "$lib/server/db"
 
 const doCheck = async (email) => {

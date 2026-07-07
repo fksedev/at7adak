@@ -1,2 +1,2 @@
-export const _APP_NAME = `SquidWay`
-export const _AWS_URL = 'https://mindspace.eu-central-1.linodeobjects.com'
+export const _APP_NAME = `At7adak`
+export const _AWS_URL = 'https://at7adak.eu-central-1.linodeobjects.com'

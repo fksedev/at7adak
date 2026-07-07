@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { fetcher, toast } from "$lib/app"
-    import { Input } from "$lib/front"
+    import { Input, fetcher } from "$lib/front"
 
     let value = $state('')
     let valid = $state(undefined)
@@ -12,7 +11,7 @@
     }
 
     const send = async () => {
-        if(!valid) return toast.error('Invalid number')
+        if(!valid) return alert('Invalid number')
         loading = true
 
         const res = await fetcher.post('/api/otp', {
@@ -20,10 +19,10 @@
         })
 
         if(res.ok && res.data.status === 200) {
-            toast.success(`message delivered to ${value}`)
+            alert(`message delivered to ${value}`)
             reset()
         } else {
-            toast.error(`Couldn't deliver to ${value}`)
+            alert(`Couldn't deliver to ${value}`)
         }
 
         loading = false

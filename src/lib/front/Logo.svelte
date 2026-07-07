@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { cn } from "$lib/app"
+    import { cn } from "$lib/front"
     let { 
         className = "",
         alt = "At7adak"

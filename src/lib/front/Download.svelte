@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Tooltip, cn } from "$lib/app"
+    import { Icon, Tooltip, cn } from "$lib/front"
     let { dark = true, className = '' } = $props()
 </script>
 

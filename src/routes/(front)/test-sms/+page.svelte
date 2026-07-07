@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { fetcher, toast } from "$lib/app"
-    import { Input } from "$lib/front"
+    import { fetcher, Input } from "$lib/front"
 
     let text = $state('')
     let value = $state('')
@@ -14,8 +13,8 @@
     }
 
     const send = async () => {
-        if(!valid) return toast.error('Invalid number')
-        if(!text) return toast.error('Invalid text')
+        if(!valid) return alert('Invalid number')
+        if(!text) return alert('Invalid text')
         loading = true
 
         const res = await fetcher.post('/api/sms', {
@@ -24,10 +23,10 @@
         })
 
         if(res.ok && res.data.status === 200) {
-            toast.success(`message delivered to ${value}`)
+            alert(`message delivered to ${value}`)
             reset()
         } else {
-            toast.error(`Couldn't deliver to ${value}`)
+            alert(`Couldn't deliver to ${value}`)
         }
 
         loading = false

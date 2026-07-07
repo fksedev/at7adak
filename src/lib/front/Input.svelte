@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { cn, LoadingDots, useAutosize, PhoneInput } from "$lib/app"
+    import { cn, LoadingDots, PhoneInput } from "$lib/front"
     import type { Snippet } from "svelte"
     import type { HTMLTextareaAttributes, HTMLInputAttributes } from "svelte/elements"
 
@@ -96,7 +96,6 @@
             {#if type === 'textarea'}
                 <textarea
                     bind:this={ref}
-                    use:useAutosize
                     class="flex-1 focus:outline-0 px-3 py-2 resize-none"
                     bind:value
                     {...rest}
