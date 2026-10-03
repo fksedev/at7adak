@@ -121,10 +121,11 @@
 						READY FOR THE <span class="text-green">CHALLENGE?</span>
 					</div>
 					<p class="text-white/75">Download AT7ADAK now and start playing.</p>
+					<p class="text-xs text-white/50">18+ only. Terms apply.</p>
 				</div>
 				<div class="shrink-0">
 					<Download size="lg" className="py-0 px-0" apk={data.apk} />
-					<div class="text-center mt-2">
+					<div class="text-center mt-2 space-y-1">
 						<a href="/download" class="text-sm text-green hover:underline underline-offset-4">
 							Full download & install guide →
 						</a>
@@ -157,64 +158,31 @@
 				<div
 					class="mx-auto w-[148px] h-[280px] rounded-[1.35rem] border-2 border-white/20 bg-black overflow-hidden relative shadow-xl"
 				>
-					<div class="absolute top-0 inset-x-0 h-5 flex-center z-10">
-						<div class="w-12 h-1 rounded-full bg-white/20"></div>
-					</div>
-					<div
-						class="h-full pt-7 px-3 pb-3 flex flex-col items-center justify-center gap-3 bg-linear-to-b from-[#101820] to-black"
-					>
-						<img src="/logo-trans.png" alt="" class="h-12 object-contain" />
-						<div class="font-hero font-bold italic text-sm text-center leading-none">
-							Play. <span class="text-green">Compete</span>. Win.
-						</div>
-						<div class="w-full mt-2 bg-green text-black text-xs font-bold py-2 rounded-md text-center">
-							Create Account
-						</div>
-						<div class="w-full border border-white/25 text-white/80 text-xs py-2 rounded-md text-center">
-							Login
-						</div>
-					</div>
+					<img
+						src="/assets/home.jpeg"
+						alt="AT7ADAK Home"
+						class="absolute inset-0 h-full w-full object-cover object-top"
+					/>
 				</div>
 			{:else if step.ui === 'wallet'}
 				<div
 					class="mx-auto w-[148px] h-[280px] rounded-[1.35rem] border-2 border-white/20 bg-black overflow-hidden relative shadow-xl"
 				>
-					<div class="absolute top-0 inset-x-0 h-5 flex-center z-10">
-						<div class="w-12 h-1 rounded-full bg-white/20"></div>
-					</div>
-					<div class="h-full pt-7 px-3 pb-3 flex flex-col gap-2 bg-linear-to-b from-[#101820] to-black">
-						<div class="text-[10px] text-white/50">Wallet</div>
-						<div class="text-xs text-white/60">Your Balance</div>
-						<div class="font-hero font-bold italic text-3xl text-green leading-none">$25.00</div>
-						<div class="w-full mt-2 bg-green text-black text-xs font-bold py-2 rounded-md text-center">
-							+ Add Funds
-						</div>
-						<div
-							class="mt-auto border border-white/10 rounded-lg p-2 text-[10px] text-white/55 flex-between"
-						>
-							<span>Whish Money</span>
-							<span class="text-green">●</span>
-						</div>
-					</div>
+					<img
+						src="/assets/home.jpeg"
+						alt="AT7ADAK wallet on Home"
+						class="absolute inset-0 h-full w-full object-cover object-[center_18%]"
+					/>
 				</div>
 			{:else if step.ui === 'games'}
 				<div
 					class="mx-auto w-[148px] h-[280px] rounded-[1.35rem] border-2 border-white/20 bg-black overflow-hidden relative shadow-xl"
 				>
-					<div class="absolute top-0 inset-x-0 h-5 flex-center z-10">
-						<div class="w-12 h-1 rounded-full bg-white/20"></div>
-					</div>
-					<div class="h-full pt-7 px-2.5 pb-3 flex flex-col gap-1.5 bg-linear-to-b from-[#101820] to-black">
-						<div class="text-[10px] text-white/50 px-1 mb-1">Choose Game</div>
-						{#each ['PUBG Mobile', 'FC 26 / FC Mobile', 'Dota 2', 'CS2'] as game}
-							<div
-								class="rounded-md border border-white/10 bg-white/5 px-2 py-2 text-[10px] flex-between"
-							>
-								<span>{game}</span>
-								<span class="text-green"><Icon name="mdi:chevron-right" size={14} /></span>
-							</div>
-						{/each}
-					</div>
+					<img
+						src="/assets/match.jpeg"
+						alt="AT7ADAK Create Match"
+						class="absolute inset-0 h-full w-full object-cover object-top"
+					/>
 				</div>
 			{:else if step.ui === 'room'}
 				<div

@@ -2,7 +2,7 @@
     import { Seo } from "$lib/front";
     let {
         title = "At7adak – Compete, Play & Win Real Money in Gaming Tournaments",
-        description = "Join At7adak, the ultimate competitive gaming platform where you can challenge players, compete in tournaments, and win real money. No luck - only skill. Play EAFC, CS2, Dota and more."
+        description = "Join At7adak, the ultimate competitive gaming platform where you can challenge players, compete in tournaments, and win real money. No luck - only skill. Play FC27, League of Legends, Dota 2, CS2 and more."
     } = $props()
 </script>
 <Seo 
@@ -14,9 +14,10 @@
         "gaming tournaments",
         "win money gaming", 
         "esports platform", 
-        "EAFC tournaments", 
+        "FC27 tournaments",
+        "League of Legends matches",
         "CS2 matches", 
-        "Dota competitions", 
+        "Dota 2 competitions", 
         "play and earn gaming", 
         "competitive gaming app", 
         "skill based gaming", 

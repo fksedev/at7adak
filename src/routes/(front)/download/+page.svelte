@@ -5,6 +5,7 @@
 		FrontFooter,
 		SeoSite,
 		Icon,
+		PhoneHero,
 		downloads,
 		appStoreReady,
 		androidReady
@@ -21,30 +22,30 @@
 	]
 
 	const benefits = [
-		{ icon: 'solar:shield-check-bold', title: 'Safe & Secure', desc: 'Verified App' },
-		{ icon: 'lucide:zap', title: 'Fast Download', desc: 'Direct from AT7ADAK' },
+		{ icon: 'solar:shield-check-bold', title: 'Official AT7ADAK APK', desc: 'Signed release from AT7ADAK' },
+		{ icon: 'lucide:zap', title: 'Direct from AT7ADAK', desc: 'Served from at7adak.com only' },
 		{ icon: 'mdi:cog-outline', title: 'Easy Installation', desc: 'Step-by-Step Guide' },
-		{ icon: 'mdi:sync', title: 'Regular Updates', desc: 'New Features & Improvements' }
+		{ icon: 'mdi:sync', title: 'Regular Updates', desc: 'Install over your existing app' }
 	]
 
 	const steps = [
 		{
 			n: 1,
 			title: 'Download the APK',
-			desc: 'Tap “Download for Android (APK)” and save the AT7ADAK file to your phone.',
+			desc: 'Tap “Download for Android (APK)” and save the official AT7ADAK file to your phone.',
 			hint: 'Browser download'
 		},
 		{
 			n: 2,
 			title: 'Allow Installation',
-			desc: 'Enable “Install unknown apps” for your browser (Chrome / Files) when Android asks.',
+			desc: 'If Android asks, enable “Install unknown apps” / “Allow from this source” for your browser (Chrome / Files).',
 			hint: 'Install unknown apps'
 		},
 		{
 			n: 3,
-			title: 'Install the App',
-			desc: 'Open the downloaded APK and tap Install on the system confirmation screen.',
-			hint: 'Install prompt'
+			title: 'Tap Install anyway',
+			desc: 'Open the APK. Google Play Protect or Android may warn that the app is not from Play Store — that is normal for our official website APK. Tap Install anyway / Install / More details → Install anyway.',
+			hint: 'Install anyway'
 		},
 		{
 			n: 4,
@@ -54,12 +55,14 @@
 		}
 	]
 
-	let openFaq = $state<number | null>(null)
-
 	const faqs = $derived([
 		{
 			q: 'Is it safe to download the APK?',
-			a: 'Yes. The APK is the official AT7ADAK release, signed by us and served over HTTPS from at7adak.com. Only download from this website — never from third-party APK sites.'
+			a: 'Yes. This is the official AT7ADAK APK, signed by AT7ADAK and served over HTTPS from at7adak.com. Only download from this website — never from third-party APK sites.'
+		},
+		{
+			q: 'Android says “Install anyway” — should I continue?',
+			a: 'Yes. Because AT7ADAK is installed from our website (not Google Play), Android / Play Protect often shows a warning. If you downloaded from at7adak.com, tap Install anyway (or More details → Install anyway) to install the official app.'
 		},
 		{
 			q: 'Why is AT7ADAK not on Google Play?',
@@ -67,11 +70,19 @@
 		},
 		{
 			q: 'How do I update to a new version?',
-			a: 'Come back to this page and download the latest APK, then install over the existing app. Your account stays intact when updates use the same official signing key.'
+			a: 'When a new version is released, download the latest official APK from this page and install it over your existing AT7ADAK app. Do not uninstall first unless we specifically ask you to — keeping the app installed preserves your data when the update is signed with the same key.'
 		},
 		{
 			q: 'What Android version is required?',
 			a: `${apk?.androidMin ?? downloads.androidMin} is required. During install, allow “Install unknown apps” for the browser you used to download the file.`
+		},
+		{
+			q: 'Is AT7ADAK 18+?',
+			a: 'Yes. AT7ADAK is for users aged 18 and over. Entry fees, balances, and withdrawals are subject to our Terms & Conditions.'
+		},
+		{
+			q: 'When can I withdraw?',
+			a: 'Withdrawals unlock at Level 2 (Active): 5+ completed matches and $30+ total played amount, up to $100/day. Level 3 (Trusted) raises that to $300/day. Level 1 players cannot withdraw yet. Full details are on the Player Levels page.'
 		}
 	])
 
@@ -123,17 +134,23 @@
 				</div>
 
 				<div class="relative flex justify-center lg:justify-end min-h-48 sm:min-h-64">
-					<img
-						src="/assets/hero-iphone.png"
-						alt="AT7ADAK app on iPhone"
-						class="relative z-10 w-[40vw] max-w-52 sm:max-w-72 md:max-w-80 -skew-x-6 drop-shadow-2xl"
-					/>
-					<img
-						src="/assets/hero-iphone.png"
-						alt=""
+					<div class="relative z-10 drop-shadow-2xl">
+						<PhoneHero
+							src="/assets/home.jpeg"
+							alt="AT7ADAK Home"
+							imgClass="!w-[40vw] !max-w-52 sm:!max-w-72 md:!max-w-80 md:!w-auto"
+						/>
+					</div>
+					<div
+						class="absolute right-2 md:right-10 top-10 opacity-55 hidden sm:block pointer-events-none scale-90 origin-top"
 						aria-hidden="true"
-						class="absolute right-0 md:right-8 top-8 w-[35vw] max-w-48 md:max-w-72 opacity-40 -skew-x-6 blur-[0.5px] hidden sm:block"
-					/>
+					>
+						<PhoneHero
+							src="/assets/match.jpeg"
+							alt=""
+							imgClass="!w-[35vw] !max-w-48 md:!max-w-72"
+						/>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -153,6 +170,12 @@
 				<div class="grid lg:grid-cols-[1fr_auto] gap-6 lg:gap-12 items-start">
 					<div class="space-y-3 w-full">
 						<Download detailed className="" apk={apk} />
+						<p class="text-xs sm:text-sm text-white/55 px-1">
+							18+ only. Terms apply.
+							<a href="/terms" class="underline underline-offset-2 hover:text-green trans"
+								>Terms &amp; Conditions</a
+							>
+						</p>
 						{#if !appStoreReady() || !androidReady(apk)}
 							<p class="text-amber-400/80 text-xs px-1">
 								{#if !appStoreReady() && !androidReady(apk)}
@@ -252,38 +275,53 @@
 				{/each}
 			</div>
 
-			<p class="text-center text-xs text-white/35 mt-6 max-w-2xl mx-auto">
-				Android may warn about apps outside Google Play. That is expected for official direct APKs.
-				Always download from at7adak.com only.
+			<p class="text-center text-xs sm:text-sm text-white/45 mt-6 max-w-2xl mx-auto leading-relaxed">
+				Android / Play Protect may show <span class="text-white/70">Install anyway</span> because the app
+				is not from Google Play. That is expected for our official website APK — tap yes / Install anyway
+				if you downloaded from at7adak.com only.
 			</p>
 		</section>
 
-		<!-- 6. FAQ -->
+		<!-- Always-visible update guidance (not hidden behind an accordion) -->
+		<section class="container pb-10 md:pb-14" id="update">
+			<div
+				class="rounded-2xl border border-green/30 bg-green/5 p-5 sm:p-8 max-w-3xl mx-auto space-y-3"
+			>
+				<h2 class="font-hero font-bold italic text-2xl sm:text-3xl md:text-4xl text-center">
+					How to <span class="text-green">Update</span> AT7ADAK
+				</h2>
+				<p class="text-sm sm:text-base text-white/75 leading-relaxed text-center">
+					When a new version is released, download the latest official APK from this page and install
+					it over your existing AT7ADAK installation. Do not uninstall the old version first unless we
+					specifically tell you to — that creates unnecessary friction and can remove local app data.
+					Updates signed with the same AT7ADAK key install over the existing app so you can keep using
+					your account as usual.
+				</p>
+			</div>
+		</section>
+
+		<!-- 6. FAQ — answers stay in the HTML via <details> for crawlability -->
 		<section class="container pb-12 md:pb-16">
 			<h2 class="font-hero font-bold italic text-3xl sm:text-4xl md:text-5xl text-center mb-6 md:mb-8 px-1">
 				Frequently Asked <span class="text-green">Questions</span>
 			</h2>
 			<div class="grid md:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto">
-				{#each faqs as faq, i}
-					<div class="border border-white/10 rounded-xl overflow-hidden bg-[#0c151e]/60 h-fit">
-						<button
-							type="button"
-							class="w-full flex items-center justify-between gap-3 text-left px-4 sm:px-5 py-3.5 sm:py-4 font-medium hover:bg-white/5 trans"
-							onclick={() => (openFaq = openFaq === i ? null : i)}
+				{#each faqs as faq}
+					<details class="border border-white/10 rounded-xl overflow-hidden bg-[#0c151e]/60 h-fit group">
+						<summary
+							class="w-full flex items-center justify-between gap-3 text-left px-4 sm:px-5 py-3.5 sm:py-4 font-medium hover:bg-white/5 trans cursor-pointer list-none"
 						>
 							<span class="text-sm md:text-[15px] leading-snug">{faq.q}</span>
-							<span class="text-green shrink-0">
-								<Icon name={openFaq === i ? 'mdi:chevron-up' : 'mdi:chevron-down'} size={22} />
+							<span class="text-green shrink-0 group-open:rotate-180 trans">
+								<Icon name="mdi:chevron-down" size={22} />
 							</span>
-						</button>
-						{#if openFaq === i}
-							<div
-								class="px-4 sm:px-5 pb-4 text-sm text-white/65 leading-relaxed border-t border-white/10 pt-3"
-							>
-								{faq.a}
-							</div>
-						{/if}
-					</div>
+						</summary>
+						<div
+							class="px-4 sm:px-5 pb-4 text-sm text-white/65 leading-relaxed border-t border-white/10 pt-3"
+						>
+							{faq.a}
+						</div>
+					</details>
 				{/each}
 			</div>
 		</section>
