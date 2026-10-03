@@ -5,7 +5,7 @@
 		FrontFooter,
 		SeoSite,
 		Icon,
-		PhoneHero,
+		DualPhones,
 		downloads,
 		appStoreReady,
 		androidReady
@@ -133,24 +133,8 @@
 					</div>
 				</div>
 
-				<div class="relative flex justify-center lg:justify-end min-h-48 sm:min-h-64">
-					<div class="relative z-10 drop-shadow-2xl">
-						<PhoneHero
-							src="/assets/home.jpeg"
-							alt="AT7ADAK Home"
-							imgClass="!w-[40vw] !max-w-52 sm:!max-w-72 md:!max-w-80 md:!w-auto"
-						/>
-					</div>
-					<div
-						class="absolute right-2 md:right-10 top-10 opacity-55 hidden sm:block pointer-events-none scale-90 origin-top"
-						aria-hidden="true"
-					>
-						<PhoneHero
-							src="/assets/match.jpeg"
-							alt=""
-							imgClass="!w-[35vw] !max-w-48 md:!max-w-72"
-						/>
-					</div>
+				<div class="relative flex justify-center lg:justify-end min-h-48 sm:min-h-64 py-2">
+					<DualPhones className="md:scale-110 md:origin-right" />
 				</div>
 			</div>
 		</section>

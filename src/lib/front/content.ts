@@ -1,7 +1,13 @@
 export const content = {
-	games: ['FC27', 'League of Legends', 'Dota 2', 'CS2'] as const,
+	games: [
+		{ name: 'EA FC 27', icon: 'mdi:soccer' },
+		{ name: 'NBA 2K26', icon: 'mdi:basketball' },
+		{ name: 'UFC 5', icon: 'mdi:karate' },
+		{ name: 'Dota 2', icon: 'simple-icons:dota2' },
+		{ name: 'FC27 UT', icon: 'mdi:shield-star' }
+	] as const,
 	what: {
-		text: `At7adak is a competitive gaming app where players challenge each other in real matches for real rewards.\nWhether you play FC27, League of Legends, Dota 2, CS2, or other supported titles, every match is a chance to prove your skill and win.`,
+		text: `At7adak is a competitive gaming app where players challenge each other in real matches for real rewards.\nWhether you play EA FC 27, NBA 2K26, UFC 5, Dota 2, FC27 UT, or other supported titles, every match is a chance to prove your skill and win.`,
 		items: [
 			{
 				icon: `ion:game-controller-outline`,

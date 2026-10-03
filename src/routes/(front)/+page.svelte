@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Icon } from '$lib/front'
-	import { Download, FrontHeader, FrontFooter, SeoSite, BtnSkew, content, PhoneHero } from '$lib/front'
+	import { Download, FrontHeader, FrontFooter, SeoSite, BtnSkew, content, DualPhones } from '$lib/front'
 	import type { PageData } from './$types'
 
 	let { data }: { data: PageData } = $props()
@@ -52,11 +52,32 @@
 						</div>
 					</div>
 
-					<!-- Phone sits in its own band so skew never overlaps the CTA / 18+ copy -->
+					<!-- Dual phones: Home + Create Match (mockup layout) -->
 					<div
-						class="relative z-0 flex justify-center w-full md:w-auto shrink-0 pt-4 pb-2 md:pt-0 md:pb-0 px-6 sm:px-8"
+						class="relative z-0 flex justify-center w-full md:w-auto shrink-0 pt-6 pb-4 md:pt-0 md:pb-0"
 					>
-						<PhoneHero src="/assets/home.jpeg" alt="AT7ADAK Home" />
+						<DualPhones />
+					</div>
+				</div>
+
+				<!-- Games row under hero copy + phones, matching the mockup -->
+				<div class="pt-6 md:pt-8" id="games">
+					<div class="font-hero font-bold italic text-xl sm:text-2xl mb-4 text-center md:text-left">
+						PLAY YOUR <span class="text-green">FAVORITE GAMES</span>
+					</div>
+					<div class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
+						{#each content.games as game}
+							<div class="flex flex-col items-center gap-2 w-[4.5rem] sm:w-[5.25rem]">
+								<div
+									class="size-14 sm:size-16 rounded-xl border border-green/50 bg-black/70 flex-center text-green shadow-[0_0_18px_rgba(198,223,40,0.12)]"
+								>
+									<Icon name={game.icon} size={28} />
+								</div>
+								<div class="text-[11px] sm:text-xs text-white/80 text-center leading-tight">
+									{game.name}
+								</div>
+							</div>
+						{/each}
 					</div>
 				</div>
 			</div>
@@ -85,24 +106,6 @@
 					</div>
 					<div class="font-hero font-bold italic text-xl sm:text-2xl">{item.title}</div>
 					<div class="text-white text-sm">{item.desc}</div>
-				</div>
-			{/each}
-		</div>
-	</div>
-
-	<div class="container relative py-8 md:py-10" id="games">
-		<div class="font-hero font-bold italic text-3xl sm:text-4xl text-center mb-6">
-			PLAY YOUR <span class="text-green">FAVORITE GAMES</span>
-		</div>
-		<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
-			{#each content.games as game}
-				<div
-					class="rounded-xl border border-white/10 bg-[#0c151e]/80 px-3 py-5 text-center hover:border-green/40 trans"
-				>
-					<div class="text-green mb-2 flex-center">
-						<Icon name="ion:game-controller" size={28} />
-					</div>
-					<div class="font-hero font-bold italic text-lg sm:text-xl leading-tight">{game}</div>
 				</div>
 			{/each}
 		</div>

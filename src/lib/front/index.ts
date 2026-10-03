@@ -1,5 +1,6 @@
 export * from './content'
 export { default as PhoneHero } from './PhoneHero.svelte'
+export { default as DualPhones } from './DualPhones.svelte'
 export * from './downloads'
 export * from './utils'
 export { default as Download } from './Download.svelte'
