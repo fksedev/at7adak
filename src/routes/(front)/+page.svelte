@@ -20,8 +20,8 @@
 
 		<div class="container space-y-8 md:space-y-10 pb-8">
 			<div class="md:max-w-150 mx-auto">
-				<div class="flex-center flex-col md:flex-row gap-6 md:gap-5">
-					<div class="space-y-4 md:space-y-5 w-full text-center md:text-left">
+				<div class="flex flex-col md:flex-row md:items-center gap-8 md:gap-6">
+					<div class="space-y-4 md:space-y-5 w-full text-center md:text-left relative z-10">
 						<div class="font-hero font-bold italic">
 							<h2 class="text-white text-4xl sm:text-5xl">The competition</h2>
 							<h2 class="text-green text-5xl sm:text-6xl">Starts Now</h2>
@@ -43,7 +43,7 @@
 								DOWNLOAD AT7ADAK
 							</div>
 							<Download className="py-0 px-0" apk={data.apk} />
-							<p class="text-xs sm:text-sm text-white/55">
+							<p class="text-xs sm:text-sm text-white/55 relative z-10">
 								18+ only. Terms apply.
 								<a href="/terms" class="underline underline-offset-2 hover:text-green trans"
 									>Terms &amp; Conditions</a
@@ -52,23 +52,19 @@
 						</div>
 					</div>
 
-					<div class="flex-center w-full md:w-auto">
+					<!-- Phone sits in its own band so skew never overlaps the CTA / 18+ copy -->
+					<div
+						class="relative z-0 flex justify-center w-full md:w-auto shrink-0 pt-4 pb-2 md:pt-0 md:pb-0 px-6 sm:px-8"
+					>
 						<PhoneHero src="/assets/home.jpeg" alt="AT7ADAK Home" />
 					</div>
 				</div>
 			</div>
 
-			<div>
-				<div class="font-hero font-bold italic text-green text-3xl sm:text-4xl text-center">
-					Download AT7ADAK
-				</div>
-				<Download className="py-3 px-0" apk={data.apk} />
-				<div class="text-center text-sm text-white/50 space-y-1">
-					<p>18+ only. Terms apply.</p>
-					<a href="/download" class="hover:text-green trans underline underline-offset-4">
-						Installation guide & FAQ
-					</a>
-				</div>
+			<div class="text-center text-sm text-white/50 space-y-1 pt-2 border-t border-white/5">
+				<a href="/download" class="hover:text-green trans underline underline-offset-4">
+					Installation guide &amp; FAQ →
+				</a>
 			</div>
 		</div>
 	</div>

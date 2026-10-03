@@ -18,29 +18,30 @@
 	} = $props()
 </script>
 
-<div class={cn('relative inline-block -skew-x-6', className)}>
-	<!-- Bezel + lighting only (fake screen covered by real screenshot) -->
-	<img
-		src="/assets/hero-iphone.png"
-		alt=""
-		aria-hidden="true"
-		class={cn(
-			'block w-[42vw] max-w-48 sm:max-w-56 md:w-auto md:max-w-none select-none',
-			imgClass
-		)}
-	/>
+<!-- Outer wrapper absorbs skew overflow so neighbors don't collide -->
+<div class={cn('relative mx-auto w-fit max-w-full px-3 py-2', className)}>
+	<div class="relative inline-block origin-center -skew-x-6">
+		<img
+			src="/assets/hero-iphone.png"
+			alt=""
+			aria-hidden="true"
+			class={cn(
+				'block h-auto w-[min(52vw,13.5rem)] sm:w-[min(48vw,15rem)] md:w-auto md:max-w-[17rem] select-none',
+				imgClass
+			)}
+		/>
 
-	<!-- Live app screenshot fitted to the screen region -->
-	<div
-		class="pointer-events-none absolute overflow-hidden bg-black"
-		style="
-			left: 12.2%;
-			top: 4.2%;
-			width: 75.6%;
-			height: 91.6%;
-			border-radius: 12% / 6%;
-		"
-	>
-		<img {src} {alt} class="absolute inset-0 h-full w-full object-cover object-top" />
+		<div
+			class="pointer-events-none absolute overflow-hidden bg-black"
+			style="
+				left: 12.2%;
+				top: 4.2%;
+				width: 75.6%;
+				height: 91.6%;
+				border-radius: 12% / 6%;
+			"
+		>
+			<img {src} {alt} class="absolute inset-0 h-full w-full object-cover object-top" />
+		</div>
 	</div>
 </div>
