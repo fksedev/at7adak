@@ -2,7 +2,7 @@
 	import { Logo, Socials, cn } from '$lib/front'
 
 	let {
-		active = '' as '' | 'home' | 'download' | 'how'
+		active = '' as '' | 'home' | 'download' | 'how' | 'games' | 'tournaments' | 'support'
 	} = $props()
 
 	let open = $state(false)
@@ -28,23 +28,27 @@
 <header class="container py-3 md:py-4 relative z-30">
 	<div class="flex items-center justify-between gap-3">
 		<a href="/" class="shrink-0 relative z-40" aria-label="AT7ADAK home" onclick={close}>
-			<Logo className="h-12 sm:h-14 md:h-20" />
+			<Logo className="h-12 sm:h-14 md:h-16 lg:h-20" />
 		</a>
 
-		<!-- Desktop / tablet nav (≥768px) -->
-		<nav class="hidden md:flex items-center gap-6" aria-label="Primary">
+		<nav class="hidden lg:flex items-center gap-5 xl:gap-7" aria-label="Primary">
 			<a href="/" class={desktopLink('home')}>Home</a>
 			<a href="/how-it-works" class={desktopLink('how')}>How It Works</a>
-			<a href="/download" class={desktopLink('download')}>Download</a>
+			<a href="/#games" class={desktopLink('games')}>Games</a>
+			<a href="/how-it-works" class={desktopLink('tournaments')}>Tournaments</a>
+			<a href="/contact" class={desktopLink('support')}>Support</a>
 		</nav>
 
-		<div class="hidden md:block shrink-0">
-			<Socials />
-		</div>
+		<a
+			href="/download"
+			class="hidden md:inline-flex shrink-0 items-center justify-center rounded-full bg-green px-5 py-2.5 text-sm font-bold text-black hover:bg-green/90 trans"
+		>
+			Download App
+		</a>
 
-		<!-- Mobile: socials + menu in the top-right -->
-		<div class="md:hidden relative z-40 flex items-center gap-2.5 shrink-0">
-			<Socials compact size={20} className="max-[380px]:gap-1" />
+		<!-- Mobile: socials + menu -->
+		<div class="md:hidden relative z-40 flex items-center gap-2 shrink-0">
+			<Socials compact size={18} className="max-[380px]:gap-1" />
 			<button
 				type="button"
 				class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border-2 border-green bg-black text-green"
@@ -91,10 +95,12 @@
 		>
 			<a href="/" class={linkClass('home')} onclick={close}>Home</a>
 			<a href="/how-it-works" class={linkClass('how')} onclick={close}>How It Works</a>
+			<a href="/#games" class={linkClass('games')} onclick={close}>Games</a>
+			<a href="/how-it-works" class={linkClass('tournaments')} onclick={close}>Tournaments</a>
+			<a href="/contact" class={linkClass('support')} onclick={close}>Support</a>
 			<a href="/download" class={linkClass('download')} onclick={close}>Download</a>
 			<a href="/fair-play" class={linkClass('')} onclick={close}>Fair Play</a>
 			<a href="/withdrawal-limits" class={linkClass('')} onclick={close}>Withdrawal Limits</a>
-			<a href="/contact" class={linkClass('')} onclick={close}>Contact / Support</a>
 		</nav>
 	{/if}
 </header>

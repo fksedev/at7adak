@@ -112,7 +112,9 @@
 	</div>
 {:else}
 	<div class={cn('py-4 sm:py-6 px-0 sm:px-3 overflow-x-auto scrollbar-hide', className)}>
-		<div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center w-full">
+		<div
+			class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center w-full justify-center lg:justify-start"
+		>
 			{#if iosOk}
 				<a
 					href={downloads.appStoreUrl}

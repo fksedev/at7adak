@@ -2,8 +2,8 @@
 	import { cn } from '$lib/front'
 
 	/**
-	 * Hero phone: keeps the existing 3D bezel/lighting mockup and shows a
-	 * real AT7ADAK screenshot in the screen area.
+	 * Clean device frame for real AT7ADAK screenshots (home / match).
+	 * Thin black bezel + dynamic island — no skewed 3D frame.
 	 */
 	let {
 		src = '/assets/home.jpeg',
@@ -18,30 +18,26 @@
 	} = $props()
 </script>
 
-<!-- Outer wrapper absorbs skew overflow so neighbors don't collide -->
-<div class={cn('relative mx-auto w-fit max-w-full px-3 py-2', className)}>
-	<div class="relative inline-block origin-center -skew-x-6">
-		<img
-			src="/assets/hero-iphone.png"
-			alt=""
-			aria-hidden="true"
-			class={cn(
-				'block h-auto w-[min(52vw,13.5rem)] sm:w-[min(48vw,15rem)] md:w-auto md:max-w-[17rem] select-none',
-				imgClass
-			)}
-		/>
+<div class={cn('relative mx-auto w-fit max-w-full', className)}>
+	<div
+		class={cn(
+			'relative w-[11.5rem] sm:w-[13.5rem] lg:w-[15rem] overflow-hidden rounded-[1.7rem] sm:rounded-[1.9rem] lg:rounded-[2.1rem] border-[3px] border-[#1f1f22] bg-black',
+			'shadow-[0_20px_55px_rgba(0,0,0,0.6)] ring-1 ring-white/12',
+			imgClass
+		)}
+	>
+		<img {src} {alt} class="block h-auto w-full select-none" draggable="false" />
 
+		<!-- Dynamic Island -->
 		<div
-			class="pointer-events-none absolute overflow-hidden bg-black"
-			style="
-				left: 12.2%;
-				top: 4.2%;
-				width: 75.6%;
-				height: 91.6%;
-				border-radius: 12% / 6%;
-			"
-		>
-			<img {src} {alt} class="absolute inset-0 h-full w-full object-cover object-top" />
-		</div>
+			class="pointer-events-none absolute left-1/2 top-[0.55rem] z-10 h-[1.05rem] w-[5.4rem] -translate-x-1/2 rounded-full bg-black sm:top-[0.62rem] sm:h-[1.12rem] sm:w-[5.9rem]"
+			aria-hidden="true"
+		></div>
+
+		<!-- Subtle top edge highlight -->
+		<div
+			class="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-white/15"
+			aria-hidden="true"
+		></div>
 	</div>
 </div>

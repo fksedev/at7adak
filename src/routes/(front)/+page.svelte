@@ -4,90 +4,110 @@
 	import type { PageData } from './$types'
 
 	let { data }: { data: PageData } = $props()
+
+	const trust = [
+		{ icon: 'solar:shield-check-bold', label: 'Safe & Secure' },
+		{ icon: 'lucide:zap', label: 'Real Rewards' },
+		{ icon: 'clarity:users-line', label: 'Active Community' },
+		{ icon: 'solar:cup-star-bold', label: 'Exciting Tournaments' }
+	]
 </script>
 
 <SeoSite />
 
 <div class="relative overflow-x-hidden">
 	<div
-		class="bg-[url('/assets/hero-bg.webp')] bg-no-repeat bg-cover bg-center min-h-[70vh] md:min-h-170 absolute inset-x-0 top-10 z-0 opacity-60"
+		class="pointer-events-none absolute inset-x-0 top-0 z-0 h-[min(92vh,920px)] bg-[url('/assets/hero-bg.webp')] bg-cover bg-center bg-no-repeat opacity-70"
+	></div>
+	<div
+		class="pointer-events-none absolute inset-x-0 top-0 z-0 h-36 bg-linear-to-b from-black via-black/50 to-transparent"
+	></div>
+	<div
+		class="pointer-events-none absolute inset-x-0 top-[min(62vh,640px)] z-0 h-48 bg-linear-to-t from-black via-black/55 to-transparent"
 	></div>
 
-	<div class="absolute inset-x-0 top-10 h-40 bg-linear-to-b from-black to-transparent"></div>
-
-	<div class="relative min-h-[70vh] md:min-h-170">
+	<div class="relative">
 		<FrontHeader active="home" />
 
-		<div class="container space-y-8 md:space-y-10 pb-8">
-			<div class="md:max-w-150 mx-auto">
-				<div class="flex flex-col md:flex-row md:items-center gap-8 md:gap-6">
-					<div class="space-y-4 md:space-y-5 w-full text-center md:text-left relative z-10">
-						<div class="font-hero font-bold italic">
-							<h2 class="text-white text-4xl sm:text-5xl">The competition</h2>
-							<h2 class="text-green text-5xl sm:text-6xl">Starts Now</h2>
-						</div>
-
-						<div
-							class="leading-[1.35] text-sm sm:text-base text-white/90 max-w-md mx-auto md:mx-0"
+		<section class="container pb-8 lg:pb-12 pt-1 lg:pt-2">
+			<div
+				class="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-5 lg:gap-2 xl:gap-4 items-start lg:items-center"
+			>
+				<!-- Left column: copy + downloads + trust + games -->
+				<div class="space-y-4 lg:space-y-5 text-center lg:text-left relative z-10 order-1">
+					<h1 class="font-hero font-bold italic leading-[0.9] tracking-tight">
+						<span class="block text-white text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-7xl"
+							>PLAY.</span
 						>
-							At7adak is the ultimate competitive gaming app. Challenge real players, compete in
-							matches, and win real money.
-						</div>
+						<span class="block text-green text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-7xl"
+							>COMPETE.</span
+						>
+						<span class="block text-white text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-7xl"
+							>WIN.</span
+						>
+					</h1>
 
-						<div class="font-hero font-bold text-2xl sm:text-3xl italic">
-							NO LUCK. <span class="text-green">ONLY SKILL.</span>
-						</div>
+					<p class="text-white/75 text-sm sm:text-base max-w-md mx-auto lg:mx-0 leading-relaxed">
+						Challenge players in your favorite games, join tournaments and win real rewards.
+					</p>
 
-						<div class="space-y-3">
-							<div class="font-hero font-bold italic text-2xl sm:text-3xl text-green">
-								DOWNLOAD AT7ADAK
-							</div>
-							<Download className="py-0 px-0" apk={data.apk} />
-							<p class="text-xs sm:text-sm text-white/55 relative z-10">
-								18+ only. Terms apply.
-								<a href="/terms" class="underline underline-offset-2 hover:text-green trans"
-									>Terms &amp; Conditions</a
-								>
-							</p>
-						</div>
+					<div class="space-y-1.5">
+						<Download className="py-0 px-0" apk={data.apk} />
+						<p class="text-xs text-white/45">
+							18+ only. Terms apply.
+							<a href="/terms" class="underline underline-offset-2 hover:text-green trans"
+								>Terms &amp; Conditions</a
+							>
+						</p>
 					</div>
 
-					<!-- Dual phones: Home + Create Match (mockup layout) -->
-					<div
-						class="relative z-0 flex justify-center w-full md:w-auto shrink-0 pt-6 pb-4 md:pt-0 md:pb-0"
-					>
-						<DualPhones />
-					</div>
-				</div>
-
-				<!-- Games row under hero copy + phones, matching the mockup -->
-				<div class="pt-6 md:pt-8" id="games">
-					<div class="font-hero font-bold italic text-xl sm:text-2xl mb-4 text-center md:text-left">
-						PLAY YOUR <span class="text-green">FAVORITE GAMES</span>
-					</div>
-					<div class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
-						{#each content.games as game}
-							<div class="flex flex-col items-center gap-2 w-[4.5rem] sm:w-[5.25rem]">
-								<div
-									class="size-14 sm:size-16 rounded-xl border border-green/50 bg-black/70 flex-center text-green shadow-[0_0_18px_rgba(198,223,40,0.12)]"
-								>
-									<Icon name={game.icon} size={28} />
-								</div>
-								<div class="text-[11px] sm:text-xs text-white/80 text-center leading-tight">
-									{game.name}
-								</div>
+					<div class="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2">
+						{#each trust as item}
+							<div class="flex items-center gap-2">
+								<span class="text-[#e8f07a]"><Icon name={item.icon} size={20} /></span>
+								<span class="text-xs sm:text-sm text-white/80 whitespace-nowrap">{item.label}</span>
 							</div>
 						{/each}
 					</div>
+
+					<!-- Games under left column like mockup -->
+					<div class="pt-1" id="games">
+						<div
+							class="font-hero font-bold italic text-sm sm:text-base mb-2.5 tracking-wide text-white/95"
+						>
+							PLAY YOUR FAVORITE GAMES
+						</div>
+						<div class="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-3.5">
+							{#each content.games as game}
+								<div class="flex flex-col items-center gap-1 w-[4.25rem] sm:w-[4.75rem]">
+									<div
+										class="size-12 sm:size-14 rounded-xl border border-green/60 bg-black/80 flex-center text-green shadow-[0_0_24px_rgba(198,223,40,0.22)]"
+									>
+										<Icon name={game.icon} size={24} />
+									</div>
+									<div class="text-[10px] text-white/70 text-center leading-tight">
+										{game.name}
+									</div>
+								</div>
+							{/each}
+						</div>
+					</div>
+				</div>
+
+				<!-- Right: dual phones -->
+				<div
+					class="relative z-0 order-2 flex justify-center lg:justify-center xl:justify-end py-2 lg:py-0 lg:-ms-4"
+				>
+					<DualPhones />
 				</div>
 			</div>
 
-			<div class="text-center text-sm text-white/50 space-y-1 pt-2 border-t border-white/5">
+			<div class="text-center text-sm text-white/45 pt-8">
 				<a href="/download" class="hover:text-green trans underline underline-offset-4">
 					Installation guide &amp; FAQ →
 				</a>
 			</div>
-		</div>
+		</section>
 	</div>
 
 	<div class="container relative">
@@ -165,10 +185,10 @@
 			<div class="flex-between flex-col md:flex-row gap-5 text-center md:text-left">
 				<div>
 					<div class="font-hero font-bold italic text-2xl sm:text-4xl leading-none">
-						THE COMPETITION STARTS <span class="text-green">NOW</span>
+						PLAY. <span class="text-green">COMPETE.</span> WIN.
 					</div>
 					<div class="leading-none mt-2 text-sm sm:text-base lg:tracking-[0.18em]">
-						PLAY. COMPETE. WIN REWARDS.
+						DOWNLOAD AT7ADAK AND START COMPETING.
 					</div>
 					<p class="text-xs text-white/50 mt-2">18+ only. Terms apply.</p>
 				</div>
