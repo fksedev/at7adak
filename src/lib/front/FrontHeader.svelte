@@ -42,35 +42,38 @@
 			<Socials />
 		</div>
 
-		<!-- Hamburger: mobile only (&lt;768px) -->
-		<button
-			type="button"
-			class="md:hidden relative z-40 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border-2 border-green bg-black text-green"
-			aria-label={open ? 'Close menu' : 'Open menu'}
-			aria-expanded={open}
-			aria-controls="mobile-nav"
-			onclick={() => (open = !open)}
-		>
-			{#if open}
-				<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path
-						d="M6 6l12 12M18 6L6 18"
-						stroke="currentColor"
-						stroke-width="2.5"
-						stroke-linecap="round"
-					/>
-				</svg>
-			{:else}
-				<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-					<path
-						d="M4 7h16M4 12h16M4 17h16"
-						stroke="currentColor"
-						stroke-width="2.5"
-						stroke-linecap="round"
-					/>
-				</svg>
-			{/if}
-		</button>
+		<!-- Mobile: socials + menu in the top-right -->
+		<div class="md:hidden relative z-40 flex items-center gap-2.5 shrink-0">
+			<Socials compact size={20} className="max-[380px]:gap-1" />
+			<button
+				type="button"
+				class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border-2 border-green bg-black text-green"
+				aria-label={open ? 'Close menu' : 'Open menu'}
+				aria-expanded={open}
+				aria-controls="mobile-nav"
+				onclick={() => (open = !open)}
+			>
+				{#if open}
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path
+							d="M6 6l12 12M18 6L6 18"
+							stroke="currentColor"
+							stroke-width="2.5"
+							stroke-linecap="round"
+						/>
+					</svg>
+				{:else}
+					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path
+							d="M4 7h16M4 12h16M4 17h16"
+							stroke="currentColor"
+							stroke-width="2.5"
+							stroke-linecap="round"
+						/>
+					</svg>
+				{/if}
+			</button>
+		</div>
 	</div>
 
 	{#if open}
@@ -89,9 +92,9 @@
 			<a href="/" class={linkClass('home')} onclick={close}>Home</a>
 			<a href="/how-it-works" class={linkClass('how')} onclick={close}>How It Works</a>
 			<a href="/download" class={linkClass('download')} onclick={close}>Download</a>
-			<div class="mx-2 my-2 border-t border-white/10 pt-3 pb-2 flex justify-center">
-				<Socials />
-			</div>
+			<a href="/fair-play" class={linkClass('')} onclick={close}>Fair Play</a>
+			<a href="/levels" class={linkClass('')} onclick={close}>Player Levels</a>
+			<a href="/contact" class={linkClass('')} onclick={close}>Contact / Support</a>
 		</nav>
 	{/if}
 </header>
