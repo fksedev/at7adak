@@ -27,7 +27,7 @@
 			<a href="/privacy" class="hover:text-green trans py-1">Privacy Policy</a>
 			<a href="/terms" class="hover:text-green trans py-1">Terms &amp; Conditions</a>
 			<a href="/fair-play" class="hover:text-green trans py-1">Fair Play</a>
-			<a href="/levels" class="hover:text-green trans py-1">Player Levels</a>
+			<a href="/withdrawal-limits" class="hover:text-green trans py-1">Withdrawal Limits</a>
 			<a href="/contact" class="hover:text-green trans py-1">Contact / Support</a>
 		</nav>
 

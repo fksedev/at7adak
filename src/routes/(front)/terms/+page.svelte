@@ -126,7 +126,10 @@
 				</ul>
 				<p>
 					Level 1 (New) players cannot withdraw. See the full
-					<a href="/levels" class="text-green underline underline-offset-2">Player Levels</a> page.
+					<a href="/withdrawal-limits" class="text-green underline underline-offset-2"
+						>Withdrawal Limits</a
+					>
+					page.
 					At7adak may modify these requirements at any time.
 				</p>
 			</section>
@@ -150,7 +153,9 @@
 				<p>
 					Withdrawals are also subject to minimum amounts, processing time, and verification. Limits
 					are shown in the app and may change. Full details:
-					<a href="/levels" class="text-green underline underline-offset-2">Player Levels</a>.
+					<a href="/withdrawal-limits" class="text-green underline underline-offset-2"
+						>Withdrawal Limits</a
+					>.
 				</p>
 			</section>
 

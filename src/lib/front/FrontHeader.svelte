@@ -93,7 +93,7 @@
 			<a href="/how-it-works" class={linkClass('how')} onclick={close}>How It Works</a>
 			<a href="/download" class={linkClass('download')} onclick={close}>Download</a>
 			<a href="/fair-play" class={linkClass('')} onclick={close}>Fair Play</a>
-			<a href="/levels" class={linkClass('')} onclick={close}>Player Levels</a>
+			<a href="/withdrawal-limits" class={linkClass('')} onclick={close}>Withdrawal Limits</a>
 			<a href="/contact" class={linkClass('')} onclick={close}>Contact / Support</a>
 		</nav>
 	{/if}

@@ -82,7 +82,7 @@
 		},
 		{
 			q: 'When can I withdraw?',
-			a: 'Withdrawals unlock at Level 2 (Active): 5+ completed matches and $30+ total played amount, up to $100/day. Level 3 (Trusted) raises that to $300/day. Level 1 players cannot withdraw yet. Full details are on the Player Levels page.'
+			a: 'Withdrawals unlock at Level 2 (Active): 5+ completed matches and $30+ total played amount, up to $100/day. Level 3 (Trusted) raises that to $300/day. Level 1 players cannot withdraw yet. Full details are on the Withdrawal Limits page.'
 		}
 	])
 
