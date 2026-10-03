@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
+	import { goto, invalidateAll } from '$app/navigation'
 	import { FrontHeader, FrontFooter, SeoSite } from '$lib/front'
 	import type { ActionData, PageData } from './$types'
 
@@ -7,7 +8,125 @@
 
 	let unlocking = $state(false)
 	let uploading = $state(false)
+	let uploadPercent = $state(0)
+	let uploadLoaded = $state(0)
+	let uploadTotal = $state(0)
+	let uploadPhase = $state<'idle' | 'sending' | 'saving'>('idle')
+	let uploadError = $state('')
+	let selectedFileName = $state('')
+	let selectedFileSize = $state(0)
 	let saving = $state(false)
+
+	function formatMb(bytes: number) {
+		if (!bytes) return '0 MB'
+		return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+	}
+
+	function onApkPicked(e: Event) {
+		const input = e.currentTarget as HTMLInputElement
+		const file = input.files?.[0]
+		selectedFileName = file?.name || ''
+		selectedFileSize = file?.size || 0
+		uploadError = ''
+	}
+
+	function uploadWithProgress(formEl: HTMLFormElement) {
+		uploadError = ''
+		uploading = true
+		uploadPercent = 0
+		uploadLoaded = 0
+		uploadTotal = selectedFileSize
+		uploadPhase = 'sending'
+
+		const body = new FormData(formEl)
+
+		return new Promise<void>((resolve) => {
+			const xhr = new XMLHttpRequest()
+			xhr.open('POST', '?/upload')
+			xhr.setRequestHeader('x-sveltekit-action', 'true')
+			xhr.setRequestHeader('accept', 'application/json')
+
+			xhr.upload.onprogress = (event) => {
+				if (!event.lengthComputable) return
+				uploadTotal = event.total
+				uploadLoaded = event.loaded
+				uploadPercent = Math.min(99, Math.round((event.loaded / event.total) * 100))
+				if (event.loaded >= event.total) uploadPhase = 'saving'
+			}
+
+			xhr.upload.onload = () => {
+				uploadPercent = 100
+				uploadPhase = 'saving'
+			}
+
+			xhr.onload = async () => {
+				try {
+					const payload = JSON.parse(xhr.responseText || '{}') as {
+						type?: string
+						status?: number
+						location?: string
+						data?: { message?: string; ok?: boolean }
+					}
+
+					if (payload.type === 'redirect' && payload.location) {
+						window.location.href = payload.location
+						resolve()
+						return
+					}
+
+					if (payload.type === 'failure') {
+						uploadError = payload.data?.message || 'Upload failed'
+						uploading = false
+						uploadPhase = 'idle'
+						resolve()
+						return
+					}
+
+					if (payload.type === 'success') {
+						await invalidateAll()
+						await goto('/')
+						resolve()
+						return
+					}
+
+					if (xhr.status >= 200 && xhr.status < 400) {
+						window.location.href = '/'
+						resolve()
+						return
+					}
+
+					uploadError = payload.data?.message || `Upload failed (${xhr.status || 'error'})`
+				} catch {
+					if (xhr.status >= 200 && xhr.status < 400) {
+						window.location.href = '/'
+						resolve()
+						return
+					}
+					uploadError = `Upload failed (${xhr.status || 'network error'})`
+				}
+
+				uploading = false
+				uploadPhase = 'idle'
+				resolve()
+			}
+
+			xhr.onerror = () => {
+				uploadError = 'Network error while uploading — check connection and try again'
+				uploading = false
+				uploadPhase = 'idle'
+				resolve()
+			}
+
+			xhr.onabort = () => {
+				uploadError = 'Upload cancelled'
+				uploading = false
+				uploadPhase = 'idle'
+				resolve()
+			}
+
+			xhr.send(body)
+		})
+	}
 </script>
 
 <SeoSite
@@ -37,6 +156,12 @@
 					: 'border-red/40 bg-red/10'}"
 			>
 				{form.message}
+			</div>
+		{/if}
+
+		{#if uploadError}
+			<div class="rounded-xl border border-red/40 bg-red/10 px-4 py-3 text-sm">
+				{uploadError}
 			</div>
 		{/if}
 
@@ -124,12 +249,9 @@
 					action="?/upload"
 					enctype="multipart/form-data"
 					class="space-y-4"
-					use:enhance={() => {
-						uploading = true
-						return async ({ update }) => {
-							await update()
-							uploading = false
-						}
+					onsubmit={(e) => {
+						e.preventDefault()
+						void uploadWithProgress(e.currentTarget)
 					}}
 				>
 					<label class="block space-y-1">
@@ -139,8 +261,15 @@
 							name="apk"
 							accept=".apk,application/vnd.android.package-archive"
 							required
-							class="block w-full text-sm file:mr-3 file:py-2 file:px-3 file:rounded file:border-0 file:bg-green file:text-black file:font-semibold"
+							onchange={onApkPicked}
+							disabled={uploading}
+							class="block w-full text-sm file:mr-3 file:py-2 file:px-3 file:rounded file:border-0 file:bg-green file:text-black file:font-semibold disabled:opacity-50"
 						/>
+						{#if selectedFileName}
+							<p class="text-xs text-white/45">
+								{selectedFileName} · {formatMb(selectedFileSize)}
+							</p>
+						{/if}
 					</label>
 
 					<div class="grid sm:grid-cols-2 gap-4">
@@ -152,7 +281,8 @@
 								required
 								placeholder="1.0.1"
 								value={data.apk.version}
-								class="w-full rounded-lg bg-black/40 border border-white/15 px-3 py-2.5"
+								disabled={uploading}
+								class="w-full rounded-lg bg-black/40 border border-white/15 px-3 py-2.5 disabled:opacity-50"
 							/>
 						</label>
 						<label class="block space-y-1">
@@ -163,7 +293,8 @@
 								required
 								placeholder="21"
 								value={data.apk.buildNumber}
-								class="w-full rounded-lg bg-black/40 border border-white/15 px-3 py-2.5"
+								disabled={uploading}
+								class="w-full rounded-lg bg-black/40 border border-white/15 px-3 py-2.5 disabled:opacity-50"
 							/>
 						</label>
 					</div>
@@ -174,21 +305,53 @@
 							type="text"
 							name="androidMin"
 							value={data.apk.androidMin}
-							class="w-full rounded-lg bg-black/40 border border-white/15 px-3 py-2.5"
+							disabled={uploading}
+							class="w-full rounded-lg bg-black/40 border border-white/15 px-3 py-2.5 disabled:opacity-50"
 						/>
 					</label>
 
 					<label class="flex items-center gap-2 text-sm">
-						<input type="checkbox" name="publish" checked class="size-4 accent-green" />
+						<input
+							type="checkbox"
+							name="publish"
+							checked
+							disabled={uploading}
+							class="size-4 accent-green"
+						/>
 						Publish on the website immediately
 					</label>
+
+					{#if uploading}
+						<div class="space-y-2 rounded-xl border border-white/10 bg-black/30 px-4 py-3">
+							<div class="flex items-center justify-between text-sm">
+								<span class="text-white/70">
+									{uploadPhase === 'saving'
+										? 'Saving on server…'
+										: `Uploading… ${uploadPercent}%`}
+								</span>
+								<span class="font-mono text-xs text-white/50">
+									{formatMb(uploadLoaded)} / {formatMb(uploadTotal || selectedFileSize)}
+								</span>
+							</div>
+							<div class="h-2.5 overflow-hidden rounded-full bg-white/10">
+								<div
+									class="h-full rounded-full bg-green transition-[width] duration-150 ease-out"
+									style="width: {uploadPercent}%"
+								></div>
+							</div>
+						</div>
+					{/if}
 
 					<button
 						type="submit"
 						disabled={uploading}
 						class="w-full bg-green text-black font-hero font-bold italic text-2xl py-2.5 rounded-lg disabled:opacity-50"
 					>
-						{uploading ? 'Uploading…' : 'Upload & update website'}
+						{#if uploading}
+							{uploadPhase === 'saving' ? 'Saving…' : `Uploading ${uploadPercent}%`}
+						{:else}
+							Upload & update website
+						{/if}
 					</button>
 				</form>
 			</div>
