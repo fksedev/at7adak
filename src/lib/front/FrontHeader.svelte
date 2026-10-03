@@ -2,7 +2,7 @@
 	import { Logo, Socials, cn } from '$lib/front'
 
 	let {
-		active = '' as '' | 'home' | 'download' | 'how' | 'games' | 'tournaments' | 'support'
+		active = '' as '' | 'home' | 'download' | 'how' | 'games' | 'support'
 	} = $props()
 
 	let open = $state(false)
@@ -35,7 +35,6 @@
 			<a href="/" class={desktopLink('home')}>Home</a>
 			<a href="/how-it-works" class={desktopLink('how')}>How It Works</a>
 			<a href="/#games" class={desktopLink('games')}>Games</a>
-			<a href="/how-it-works" class={desktopLink('tournaments')}>Tournaments</a>
 			<a href="/contact" class={desktopLink('support')}>Support</a>
 		</nav>
 
@@ -96,7 +95,6 @@
 			<a href="/" class={linkClass('home')} onclick={close}>Home</a>
 			<a href="/how-it-works" class={linkClass('how')} onclick={close}>How It Works</a>
 			<a href="/#games" class={linkClass('games')} onclick={close}>Games</a>
-			<a href="/how-it-works" class={linkClass('tournaments')} onclick={close}>Tournaments</a>
 			<a href="/contact" class={linkClass('support')} onclick={close}>Support</a>
 			<a href="/download" class={linkClass('download')} onclick={close}>Download</a>
 			<a href="/fair-play" class={linkClass('')} onclick={close}>Fair Play</a>
