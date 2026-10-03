@@ -1,5 +1,5 @@
 import { redirect, type Handle } from "@sveltejs/kit";
-import { db, dbf, adminsTable, usersTable } from "$lib/server/db";
+import { db, dbf, adminsTable, usersTable, dbConfigured } from "$lib/server/db";
 import { getVercelHeaders } from '$lib/front'
 import { deleteCookie } from "$lib/server/auth";
 
@@ -18,10 +18,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     locals.ip = VERCEL.ip
     locals.VERCEL = VERCEL
 
-    // FRONT END
+    // FRONT END — skip session lookup when DB is not configured (local marketing preview)
     const token = cookies.get('session')
     
-    if(token) {
+    if(token && dbConfigured) {
         const user = await db.query.usersTable.findFirst({ 
             columns: {
                 password: false,
@@ -47,7 +47,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     // BACKEND
     let admin
     const adminToken = cookies.get('dashtoken')
-    if(adminToken) {
+    if(adminToken && dbConfigured) {
         admin = await db.query.adminsTable.findFirst({
             columns: {
                 password: false,
@@ -68,20 +68,6 @@ export const handle: Handle = async ({ event, resolve }) => {
             throw redirect(303, '/dashboard/auth/login?revalidateAuth')
         }
     }
-
-    // if(!token) {
-    //     if(url.pathname.startsWith('/account')) {
-    //         throw redirect(303, '/')
-    //     }
-    // }
-
-    // if(event.url.pathname.startsWith('/draw')){
-    //     return await resolve(event, {
-    //         transformPageChunk: ({ html }) => {
-    //             return html.replaceAll('class="dark"', "")
-    //         }
-    //     });
-    // }
 
     return await resolve(event)
 }

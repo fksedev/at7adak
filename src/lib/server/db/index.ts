@@ -3,11 +3,30 @@ import mysql from 'mysql2/promise';
 import * as schema from './schema';
 import { env } from '$env/dynamic/private';
 
-if (!env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
+/** True when a real DATABASE_URL is configured. */
+export const dbConfigured = Boolean(env.DATABASE_URL?.trim());
 
-const client = mysql.createPool(env.DATABASE_URL);
+if (!dbConfigured) {
+	console.warn(
+		'[db] DATABASE_URL is not set — marketing pages will load, but auth/dashboard/API DB calls are disabled.'
+	);
+}
 
-export const db = drizzle(client, { schema, mode: 'default' });
+// Pool is only created when configured so missing env does not crash SSR.
+const client = dbConfigured ? mysql.createPool(env.DATABASE_URL!) : null;
 
-export * from './schema'
-export * from './utils'
+export const db = client
+	? drizzle(client, { schema, mode: 'default' })
+	: (new Proxy(
+			{},
+			{
+				get() {
+					throw new Error(
+						'DATABASE_URL is not set. Add it to .env to use database features.'
+					);
+				}
+			}
+		) as ReturnType<typeof drizzle>);
+
+export * from './schema';
+export * from './utils';

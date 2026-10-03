@@ -22,11 +22,32 @@
             ]
         },
         {
-            "source": "/(.*).(jpg|jpeg|png|webp|gif|svg|ico)", 
+            "source": "/(.*).(jpg|jpeg|png|webp|gif|svg|ico)",
             "headers": [
                 {
-                "key": "Cache-Control",
-                "value": "public, max-age=31536000, immutable"
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/downloads/(.*).apk",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/vnd.android.package-archive"
+                },
+                {
+                    "key": "Content-Disposition",
+                    "value": "attachment; filename=\"at7adak.apk\""
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600, must-revalidate"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
                 }
             ]
         }
